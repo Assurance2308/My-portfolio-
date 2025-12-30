@@ -3,129 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My S9 Site</title>
+    <title>my practice</title>
     <style>
-      body {
-        background-color: #1a1a1a;
-        color: #00ffcc;
-        text-align: center;
-        font-family: sans-serif;
-        padding-top: 50px;
-      }
-      .glow-button {
-        background-color: #00ffcc;
-        color: #1a1a1a;
-        border: none;
-        padding: 15px 30px;
-        font-size: 18px;
-        border-radius: 10px;
-        font-weight: bold;
-        box-shadow: 0 0 15px #00ffcc;
-        margin-top: 20px;
-      }
-      .glow-button:active {
-  transform: scale(0.95);
-  box-shadow: 0 0 30px #00ffcc;
-  background-color: #ffffff;
-}
-.reset-button {
-  background-color: transparent;
-  color: #ff4d4d;
-  border: 2px solid #ff4d4d;
-  padding: 10px 20px;
-  font-size: 14px;
-  border-radius: 10px;
-  margin-top: 10px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-.main-img {
-  width: 200px;
-  border-radius: 20px;
-  margin: 20px auto;
-  display: block;
-  box-shadow: 0 0 10px rgba(0,255,204,0.5);
-}
-.card {
-  background-color: #2a2a2a;
-  padding: 20px;
-  border-radius: 15px;
-  margin: 20px;
-  border: 1px solid #333;
-}
-.contact-button {
-  background-color: #007bff; /* Professional Blue */
-  color: white;
-  border: none;
-  padding: 15px 30px;
-  font-size: 18px;
-  border-radius: 10px;
-  font-weight: bold;
-  margin-top: 10px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 0 15px rgba(0, 123, 255, 0.4);
-}
-.bio-box {
-  background: rgba(255, 255, 255, 0.05);
-  border-left: 4px solid #00ffcc;
-  padding: 15px;
-  margin: 20px;
-  font-style: italic;
-  text-align: left;
-}
-footer {
-  margin-top: 50px;
-  padding: 20px;
-  border-top: 1px solid #333;
-  font-size: 12px;
-  color: #777;
-}
-.navbar {
-  background-color: #1a1a1a;
-  padding: 15px;
-  display: flex;             /* This aligns them in a row */
-  justify-content: center;   /* This centers them */
-  gap: 30px;                 /* This puts space between Home and Projects */
-  border-bottom: 2px solid #00ffcc;
-  margin-bottom: 20px;
-}
-.nav-link {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 16px;
+    :root {
+    --bg-color: #1a1a1a;
+    --text-color: #00ffcc;
 }
 
-.nav-link:hover {
-  color: #00ffcc;
+[data-theme="light"] {
+    --bg-color: #ffffff;
+    --text-color: #006655;
 }
-.nav-link.active {
-  color: #00ffcc; /* This makes the current page glow! */
-  border-bottom: 2px solid #00ffcc;
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+// 1. THEME TOGGLE LOGIC (Advanced)
+const toggleBtn = document.getElementById('theme-toggle');
+const currentTheme = localStorage.getItem('theme');
+
+// Check if you previously saved a theme preference
+if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+}
+
+toggleBtn.addEventListener('click', () => {
+    // Get the current theme state
+    let theme = document.documentElement.getAttribute('data-theme');
+    
+    // Switch the value
+    if (theme === 'light') {
+        theme = 'dark';
+    } else {
+        theme = 'light';
+    }
+    
+    // Apply it to the whole document and save it to the phone
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    
+    // Optional: Add a small vibration for S9+ feedback
+    if (window.navigator.vibrate) {
+        window.navigator.vibrate(20);
+    }
+});
+
+// 2. YOUR ORIGINAL "CHANGE MY WORLD" LOGIC
+function changeColor() {
+    // Vibrate the phone
+    window.navigator.vibrate(50);
+
+    // Generate random color
+    const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+    document.body.style.backgroundColor = randomColor;
+
+    // Random Messages
+    const messages = [
+        "You're a Coder!",
+        "S9+ Power!",
+        "Keep Clicking!",
+        "Web Magic!",
+        "Nigeria Tech!",
+        "Acode is Awesome!"
+    ];
+    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+    document.getElementById('main-text').innerText = randomMessage;
+}
+
+// 3. RESET PAGE FUNCTION
+function resetPage() {
+    // This clears the random background color and returns to the Theme Variable
+    document.body.style.backgroundColor = ""; 
+    document.getElementById('main-text').innerText = "I build web apps directly on my Samsung S9+.";
+}
+
+// 4. WHATSAPP CONTACT FUNCTION
+function contactMe() {
+    window.location.assign("https://wa.me/2349159268608");
+}
+/* Styling the main bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #1a1a1a;
+    border-bottom: 2px solid #00ffcc;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    color: #00ffcc;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Positioning the mobile menu off-screen */
+.nav-list {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 60px;
+    left: -100%; /* Hidden on the left */
+    width: 80%;
+    height: 100vh;
+    background: #222;
+    transition: 0.4s ease;
+    padding-top: 30px;
+    list-style: none;
+}
+
+/* When the menu is open */
+.nav-list.active {
+    left: 0;
+}
+
+/* The Hamburger Bars */
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px;
+    background: #00ffcc;
+    transition: 0.3s;
 }
 
     </style>
 </head>
 
 <body>
-  <nav style="background: #222; padding: 15px; text-align: center; border-bottom: 2px solid #00ffcc;">
   <nav class="navbar">
-  <a href="index.html" class="nav-link active">Home</a>
-  <a href="projects.html" class="nav-link">Projects</a>
+    <div class="logo">Assurance</div>
+    
+    <div class="menu-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+
+    <ul class="nav-list">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="#" class="nav-link" onclick="contactMe()">Contact</a></li>
+    </ul>
 </nav>
 
- <nav class="navbar">
-  <a href="index.html" class="nav-link">Home</a>
-  <a href="projects.html" class="nav-link active">Projects</a>
-</nav>
-
-</nav>
-<nav class="navbar">
-  <a href="index.html" class="nav-link">Home</a>
-  <a href="projects.html" class="nav-link">Projects</a>
 </nav>
 
     <div class="card">
@@ -138,6 +164,27 @@ footer {
   <div class="bio-box">
   <p>I am a developer from Nigeria passionate about mobile coding. This entire project was built using <b>Acode</b> on my <b>Samsung S9+</b>!</p>
 </div>
+<div class="card" style="margin-top: 30px; text-align: left;">
+    <h2 style="color: #00ffcc; text-align: center;">Message Me</h2>
+<form action="https://formspree.io/f/mzdbloar" method="POST">
+<input type="hidden" name="_next" value="https://assurance-dev.github.io/index.html">
+
+    
+    <input type="text" name="name" placeholder="Your Name" required 
+           style="width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: white; box-sizing: border-box;">
+    
+    <input type="email" name="email" placeholder="Your Email" required 
+           style="width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: white; box-sizing: border-box;">
+    
+    <textarea name="message" placeholder="Your Message" rows="4" required
+              style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: white; box-sizing: border-box;"></textarea>
+    
+    <button type="submit" class="glow-button" style="width: 100%;">Send Message</button>
+</form>
+
+    <p id="status-msg" style="text-align: center; margin-top: 10px; font-weight: bold;"></p>
+</div>
+
 <a href="projects.html" style="display: block; margin: 20px; color: #00ffcc; text-decoration: none; font-weight: bold;">
    🚀 View My Projects
 </a>
@@ -187,6 +234,45 @@ function contactMe() {
   // This 'intent' link tells Android to open the WhatsApp app specifically
   window.location.assign("whatsapp://send?phone=2349159268608");
 }
+const menuBtn = document.querySelector('#mobile-menu');
+const navList = document.querySelector('.nav-list');
+
+menuBtn.addEventListener('click', () => {
+    // This adds/removes the 'active' class to slide the menu
+    navList.classList.toggle('active');
+    
+    // Add a quick vibration for that S9+ premium feel
+    if (navigator.vibrate) navigator.vibrate(10);
+});
+const contactForm = document.getElementById('contact-form');
+const status = document.getElementById('form-status');
+
+contactForm.addEventListener('submit', function(e) {
+    e.preventDefault(); // Stop the page from refreshing
+    
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    
+    // Simple Validation Check
+    if (name.length < 2) {
+        status.innerText = "❌ Please enter a valid name.";
+        status.style.color = "#ff4d4d";
+        return;
+    }
+
+    // If everything is correct
+    status.innerText = "🚀 Sending message...";
+    status.style.color = "#00ffcc";
+
+    // Simulate a successful send
+    setTimeout(() => {
+        status.innerText = "✅ Thank you, " + name + "! I'll get back to you soon.";
+        contactForm.reset(); // Clear the form
+        
+        // Vibrate for success
+        if (navigator.vibrate) navigator.vibrate([50, 30, 50]);
+    }, 1500);
+});
 
 
 </script>
