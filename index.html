@@ -83,9 +83,33 @@ footer {
   font-size: 12px;
   color: #777;
 }
+.navbar {
+  background-color: #222;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  border-bottom: 2px solid #00ffcc;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.nav-link:hover {
+  color: #00ffcc;
+}
 
     </style>
 </head>
+<nav class="navbar">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="projects.html" class="nav-link">Projects</a>
+</nav>
+
 <body>
     <div class="card">
   <h1 id="main-text">Hi, I'm assurance!</h1>
@@ -97,6 +121,9 @@ footer {
   <div class="bio-box">
   <p>I am a developer from Nigeria passionate about mobile coding. This entire project was built using <b>Acode</b> on my <b>Samsung S9+</b>!</p>
 </div>
+<a href="projects.html" style="display: block; margin: 20px; color: #00ffcc; text-decoration: none; font-weight: bold;">
+   🚀 View My Projects
+</a>
 
   <button class="glow-button" onclick="changeColor()">Change My World!</button>
   <button class="reset-button" onclick="resetPage()">Reset</button>
