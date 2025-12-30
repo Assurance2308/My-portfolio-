@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My S9 Site</title>
+    <style>
+      body {
+        background-color: #1a1a1a;
+        color: #00ffcc;
+        text-align: center;
+        font-family: sans-serif;
+        padding-top: 50px;
+      }
+      .glow-button {
+        background-color: #00ffcc;
+        color: #1a1a1a;
+        border: none;
+        padding: 15px 30px;
+        font-size: 18px;
+        border-radius: 10px;
+        font-weight: bold;
+        box-shadow: 0 0 15px #00ffcc;
+        margin-top: 20px;
+      }
+      .glow-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 30px #00ffcc;
+  background-color: #ffffff;
+}
+.reset-button {
+  background-color: transparent;
+  color: #ff4d4d;
+  border: 2px solid #ff4d4d;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 10px;
+  margin-top: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.main-img {
+  width: 200px;
+  border-radius: 20px;
+  margin: 20px auto;
+  display: block;
+  box-shadow: 0 0 10px rgba(0,255,204,0.5);
+}
+.card {
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 15px;
+  margin: 20px;
+  border: 1px solid #333;
+}
+.contact-button {
+  background-color: #007bff; /* Professional Blue */
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-top: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.4);
+}
+.bio-box {
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid #00ffcc;
+  padding: 15px;
+  margin: 20px;
+  font-style: italic;
+  text-align: left;
+}
+footer {
+  margin-top: 50px;
+  padding: 20px;
+  border-top: 1px solid #333;
+  font-size: 12px;
+  color: #777;
+}
+.navbar {
+  background-color: #222;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  border-bottom: 2px solid #00ffcc;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.nav-link:hover {
+  color: #00ffcc;
+}
+
+    </style>
+</head>
+<nav class="navbar">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="projects.html" class="nav-link">Projects</a>
+</nav>
+
+<body>
+    <div class="card">
+  <h1 id="main-text">Hi, I'm assurance!</h1>
+  <p>I build web apps directly on my Samsung S9+.</p>
+  
+  <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300" class="main-img">
+  
+  <p><b>Skills:</b> HTML, CSS, & JavaScript</p>
+  <div class="bio-box">
+  <p>I am a developer from Nigeria passionate about mobile coding. This entire project was built using <b>Acode</b> on my <b>Samsung S9+</b>!</p>
+</div>
+<a href="projects.html" style="display: block; margin: 20px; color: #00ffcc; text-decoration: none; font-weight: bold;">
+   🚀 View My Projects
+</a>
+
+  <button class="glow-button" onclick="changeColor()">Change My World!</button>
+  <button class="reset-button" onclick="resetPage()">Reset</button>
+  <button class="contact-button" onclick="contactMe()">
+  💬 Chat on WhatsApp
+</button>
+
+</div>
+<footer>
+  <p>© 2025 | Created by Assurance on a Samsung S9+</p>
+</footer>
+
+<script>
+  function changeColor() {
+  // 1. Vibrate the phone
+  window.navigator.vibrate(50);
+
+  // 2. Change the background color
+  const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+  document.body.style.backgroundColor = randomColor;
+
+  // 3. Pick a random message
+  const messages = [
+    "You're a Coder!",
+    "S9+ Power!",
+    "Keep Clicking!",
+    "Web Magic!",
+    "Nigeria Tech!",
+    "Acode is Awesome!"
+  ];
+  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+
+  // 4. Update the text on screen
+  document.getElementById("main-text").innerText = randomMessage;
+}
+
+function resetPage() {
+  // Reset back to original dark theme and text
+  document.body.style.backgroundColor = "#1a1a1a";
+  document.getElementById("main-text").innerText = "Hello from my S9+";
+}
+
+function contactMe() {
+  // This 'intent' link tells Android to open the WhatsApp app specifically
+  window.location.assign("whatsapp://send?phone=2349159268608");
+}
+
+
+</script>
+
+
+
+</body>
+</html>
