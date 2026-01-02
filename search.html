@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { margin: 0; font-family: sans-serif; background: #f0f4f8; }
+        .header { background: #003580; color: white; padding: 30px; text-align: center; }
+        .search-box { background: white; margin: -20px 20px 20px; padding: 20px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        
+        /* Trip Type Selector */
+        .trip-type { display: flex; gap: 10px; margin-bottom: 20px; }
+        .trip-type label { flex: 1; background: #eee; padding: 10px; text-align: center; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; }
+        .trip-type input { display: none; }
+        .trip-type input:checked + label { background: #003580; color: white; }
+
+        .input-group { margin-bottom: 15px; }
+        label.field-label { display: block; font-size: 12px; color: #666; margin-bottom: 5px; font-weight: bold; }
+        input.text-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        
+        .btn-search { background: #ff5a5f; color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; font-size: 18px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="header"><h1>Flight Details</h1></div>
+
+    <div class="search-box">
+        <div class="trip-type">
+            <input type="radio" name="type" id="round" value="Round Trip" checked onclick="toggleReturn(true)">
+            <label for="round">Round Trip</label>
+            
+            <input type="radio" name="type" id="oneway" value="One Way" onclick="toggleReturn(false)">
+            <label for="oneway">One Way</label>
+        </div>
+
+        <div class="input-group">
+            <label class="field-label">FROM</label>
+            <input type="text" id="fromLoc" class="text-input" placeholder="Lagos">
+        </div>
+
+        <div class="input-group">
+            <label class="field-label">TO</label>
+            <input type="text" id="toLoc" class="text-input" placeholder="London">
+        </div>
+
+        <div class="input-group">
+            <label class="field-label">DEPARTURE DATE</label>
+            <input type="date" id="depDate" class="text-input">
+        </div>
+
+        <div class="input-group" id="returnGroup">
+            <label class="field-label">RETURN DATE</label>
+            <input type="date" id="retDate" class="text-input">
+        </div>
+
+        <button class="btn-search" onclick="sendBooking()">Check Prices</button>
+    </div>
+
+    <script>
+        function toggleReturn(show) {
+            document.getElementById('returnGroup').style.display = show ? 'block' : 'none';
+        }
+
+        function sendBooking() {
+            const type = document.querySelector('input[name="type"]:checked').value;
+            const from = document.getElementById('fromLoc').value;
+            const to = document.getElementById('toLoc').value;
+            const dep = document.getElementById('depDate').value;
+            const ret = document.getElementById('retDate').value;
+
+            if(!from || !to || !dep) return alert("Please fill important fields!");
+
+            let msg = `Hi! I want a ${type} flight:\n`;
+            msg += `🛫 From: ${from}\n🛬 To: ${to}\n📅 Date: ${dep}`;
+            if(type === "Round Trip") msg += `\n🔄 Return: ${ret}`;
+
+            window.location.assign("whatsapp://send?phone=2349124384619&text=" + encodeURIComponent(msg));
+        }
+    </script>
+</body>
+</html>
