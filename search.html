@@ -2,18 +2,26 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TravelEase | Professional Flight Search</title>
+    <title>TravelEase | Official Search</title>
     <style>
         body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f7f9; color: #333; }
+        
+        /* Header & Logo */
         .header { background: #003580; color: white; padding: 25px 20px 45px; text-align: center; }
+        .logo-circle { width: 60px; height: 60px; background: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; margin: 0 auto 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         .header h1 { margin: 0; font-size: 24px; }
+        .header p { margin: 5px 0 0; opacity: 0.8; font-size: 14px; }
+
+        /* Form Container */
         .container { background: white; margin: -30px 15px 30px; padding: 20px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         
+        /* Trip Type Toggle */
         .trip-type { display: flex; gap: 10px; margin-bottom: 20px; background: #eee; padding: 4px; border-radius: 10px; }
         .trip-type label { flex: 1; padding: 10px; text-align: center; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; }
         .trip-type input { display: none; }
         .trip-type input:checked + label { background: #003580; color: white; }
 
+        /* Input Styling */
         .input-group { margin-bottom: 15px; }
         label.field-label { display: block; font-size: 11px; color: #003580; margin-bottom: 5px; font-weight: bold; text-transform: uppercase; }
         input.text-input, select.text-input, textarea.text-input { 
@@ -24,14 +32,20 @@
         .row { display: flex; gap: 12px; margin-bottom: 15px; }
         .half { flex: 1; }
 
-        .insurance-box { background: #e7eff9; padding: 12px; border-radius: 8px; margin: 20px 0; display: flex; align-items: center; gap: 10px; }
-        .btn-search { background: #ff5a5f; color: white; border: none; padding: 16px; width: 100%; border-radius: 10px; font-weight: bold; font-size: 18px; box-shadow: 0 4px 10px rgba(255, 90, 95, 0.3); }
+        /* Checkbox Sections */
+        .opt-box { padding: 12px; border-radius: 8px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .insurance-bg { background: #e7eff9; }
+        .visa-bg { background: #fff3cd; border: 1px solid #ffeeba; }
+
+        .btn-search { background: #ff5a5f; color: white; border: none; padding: 16px; width: 100%; border-radius: 10px; font-weight: bold; font-size: 18px; margin-top: 10px; box-shadow: 0 4px 10px rgba(255, 90, 95, 0.3); }
     </style>
 </head>
 <body>
 
     <div class="header">
+        <div class="logo-circle">✈️</div>
         <h1>TravelEase Nigeria</h1>
+        <p>Your Trusted Flight Partner</p>
     </div>
 
     <div class="container">
@@ -42,7 +56,7 @@
             <label for="oneway">One Way</label>
         </div>
 
-        <label class="field-label">Your Contact Details</label>
+        <label class="field-label">Contact Details</label>
         <div class="row">
             <div class="half"><input type="tel" id="clientPhone" class="text-input" placeholder="Phone No"></div>
             <div class="half"><input type="email" id="clientEmail" class="text-input" placeholder="Email"></div>
@@ -96,7 +110,7 @@
 
         <div class="row">
             <div class="half">
-                <label class="field-label">Class</label>
+                <label class="field-label">Cabin Class</label>
                 <select id="cabin" class="text-input">
                     <option value="Economy">Economy</option>
                     <option value="Business">Business</option>
@@ -107,22 +121,27 @@
                 <label class="field-label">Stops</label>
                 <select id="stops" class="text-input">
                     <option value="Any">Any Stops</option>
-                    <option value="Non-stop">Direct Only</option>
+                    <option value="Non-stop only">Direct Only</option>
                 </select>
             </div>
         </div>
 
         <div class="input-group">
-            <label class="field-label">Preferred Airline / Special Requests</label>
-            <textarea id="requests" class="text-input" rows="2" placeholder="e.g. Qatar Airways..."></textarea>
+            <label class="field-label">Airline / Special Requests</label>
+            <textarea id="requests" class="text-input" rows="2" placeholder="e.g. Qatar Airways, extra bag..."></textarea>
         </div>
 
-        <div class="insurance-box">
+        <div class="opt-box insurance-bg">
             <input type="checkbox" id="insurance" style="width:20px; height:20px;">
             <label for="insurance" style="font-size:14px; font-weight:bold; color:#003580;">Include Travel Insurance</label>
         </div>
 
-        <button class="btn-search" onclick="sendInquiry()">Book via WhatsApp</button>
+        <div class="opt-box visa-bg">
+            <input type="checkbox" id="visa" style="width:20px; height:20px;">
+            <label for="visa" style="font-size:14px; font-weight:bold; color:#856404;">I need Visa Assistance</label>
+        </div>
+
+        <button class="btn-search" onclick="sendInquiry()">Send to Agent via WhatsApp</button>
     </div>
 
     <script>
@@ -142,24 +161,26 @@
             const cabin = document.getElementById('cabin').value;
             const stops = document.getElementById('stops').value;
             const requests = document.getElementById('requests').value || "None";
-            const insurance = document.getElementById('insurance').checked ? "✅ YES" : "❌ NO";
+            const ins = document.getElementById('insurance').checked ? "✅ YES" : "❌ NO";
+            const visa = document.getElementById('visa').checked ? "✅ YES, Needed" : "❌ NO";
             const phone = document.getElementById('clientPhone').value || "N/A";
             const email = document.getElementById('clientEmail').value || "N/A";
 
             if(!from || !to || !dep) return alert("Fill in Route and Departure Date!");
 
             const myNum = "2349124384619";
-            let msg = `✨ *FLIGHT INQUIRY* ✨\n\n`;
+            let msg = `✨ *OFFICIAL FLIGHT INQUIRY* ✨\n\n`;
             msg += `👤 *CLIENT:* ${phone} / ${email}\n\n`;
             msg += `🛫 *ROUTE:* ${from} ➔ ${to}\n`;
             msg += `📅 *TYPE:* ${type} (${cabin})\n`;
             msg += `🗓️ *DEPARTURE:* ${dep}\n`;
             if(type === "Round Trip") msg += `🗓️ *RETURN:* ${ret}\n`;
             msg += `\n👥 *TRAVELERS:*\n- ${adl}\n- ${chi}\n- ${inf}\n`;
-            msg += `\n🛡️ *INSURANCE:* ${insurance}\n`;
+            msg += `\n🛡️ *INSURANCE:* ${ins}\n`;
+            msg += `🛂 *VISA HELP:* ${visa}\n`;
             msg += `\n⚙️ *PREFERENCES:*\n- Stops: ${stops}\n- Requests: ${requests}`;
 
-            window.location.assign("whatsapp://send?phone=2349124384619&text=" + encodeURIComponent(msg));
+            window.location.assign("whatsapp://send?phone=" + myNum + "&text=" + encodeURIComponent(msg));
         }
     </script>
 </body>
